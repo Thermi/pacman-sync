@@ -1,0 +1,17 @@
+# Force disks to sync to reduce the risk of data corruption
+
+[Trigger]
+Operation = Install
+Operation = Upgrade
+Operation = Remove
+Type = Package
+Target = *
+
+[Action]
+Description = sync all file systems
+Depends = coreutils
+Depends = python
+Depends = python-psutil
+When = PostTransaction
+Exec = /etc/pacman.d/hooks/sync_fs.py
+NeedsTargets
